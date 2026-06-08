@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÁMOS Pexeso test1</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <h1>Školní Pexeso</h1>
+    
+    <!-- Hlavní kontejner pro nastavení hry před startem -->
+    <div id="uvodni-obrazovka">
+        <!-- 1. KROK: Výběr počtu hráčů -->
+        <div id="sekce-pocet-hracu">
+            <p>Vyber počet hráčů:</p>
+            <div class="tlacitka-kontejner">
+                <button class="btn-volba btn-hraci" data-hraci="1">1 Hráč</button>
+                <button class="btn-volba btn-hraci" data-hraci="2">2 Hráči</button>
+                <button class="btn-volba btn-hraci" data-hraci="3">3 Hráči</button>
+                <button class="btn-volba btn-hraci" data-hraci="4">4 Hráči</button>
+            </div>
+        </div>
+
+        <!-- 2. KROK: Zadání jmen (zobrazí se dynamicky) -->
+        <div id="sekce-jmena-hracu" class="skryte">
+            <p>Zadejte jména hráčů:</p>
+            <div id="vstupy-jmen"></div>
+            <button id="btn-potvrdit-jmena" class="btn-volba">Pokračovat k obtížnosti</button>
+        </div>
+
+        <!-- 3. KROK: Výběr obtížnosti (zobrazí se až po jménech) -->
+        <div id="sekce-obtiznost" class="skryte">
+            <p>Vyber si obtížnost hry:</p>
+            <div class="tlacitka-kontejner">
+                <button class="btn-volba btn-obtiznost" data-karet="12">12 karet (6 dvojic)</button>
+                <button class="btn-volba btn-obtiznost" data-karet="24">24 karet (12 dvojic)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel se skóre, který bude vidět během hry -->
+    <div id="panel-skore" class="skryte"></div>
+
+    <!-- Herní plocha -->
+    <div id="herni-plocha" class="skryte"></div>
+
+    <!-- Výherní vyskakovací okno -->
+    <div id="vyherni-okno" class="skryte">
+        <div class="okno-obsah">
+            <h2 id="vyherni-nadpis">Skvělá práce! 🎉</h2>
+            <p id="vyherni-text">Zvládl jsi to na jedničku.</p>
+            <button id="reset-tlacitko">Hrát znovu</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
