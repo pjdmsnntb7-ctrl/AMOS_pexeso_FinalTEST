@@ -1,0 +1,315 @@
+/* --- ZÁKLADNÍ NASTAVENÍ A FONTY --- */
+body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(circle, #ffffff 0%, #f5f7fa 100%);
+    color: #2c3e50;
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+h1 {
+    margin: 0 0 10px 0;
+    font-size: 2.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1a252f;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* --- ÚVODNÍ OBRAZOVKA (MENU) --- */
+#uvodni-obrazovka {
+    text-align: center;
+    margin-top: 10px;
+    background: white;
+    padding: 30px 40px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+#uvodni-obrazovka p {
+    font-size: 1.4rem;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+.tlacitka-kontejner {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-volba {
+    background-color: #28bebe;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(40, 190, 190, 0.15);
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.btn-volba:active {
+    transform: scale(0.95);
+}
+
+/* Vstupy pro jména hráčů */
+#vstupy-jmen {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.input-jmeno {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border: 2px solid #bdc3c7;
+    border-radius: 12px;
+    width: 260px;
+    outline: none;
+    text-align: center;
+    transition: border-color 0.2s;
+}
+
+.input-jmeno:focus {
+    border-color: #28bebe;
+}
+
+/* --- PANEL SE SKÓRE (BĚHEM HRY) --- */
+#panel-skore {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+}
+
+.skore-box {
+    background: white;
+    padding: 12px 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 2px solid transparent;
+    text-align: center;
+    min-width: 100px;
+    transition: all 0.3s ease;
+}
+
+/* Zvýraznění aktivního hráče, který zrovna kliká */
+.skore-box.na-tahu {
+    border-color: #28bebe;
+    background-color: rgba(40, 190, 190, 0.05);
+    transform: scale(1.05);
+}
+
+.skore-jmeno {
+    font-size: 1rem;
+    color: #7f8c8d;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.skore-body {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #2c3e50;
+}
+
+/* --- HERNÍ PLOCHA --- */
+#herni-plocha {
+    display: grid;
+    gap: 15px;
+    width: 95%;
+    max-width: 1000px;
+    perspective: 1000px;
+    justify-content: center;
+    margin: 15px auto;
+    
+    /* Ochrana nízkých displejů proti přetečení */
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+/* Čtvercové karty 140x140px pro PC a ÁMOS */
+.karta {
+    width: 140px; 
+    aspect-ratio: 1 / 1; 
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.karta-vnitrek {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+}
+
+.karta.otocena .karta-vnitrek {
+    transform: rotateY(180deg);
+}
+
+.karta-rub, .karta-lic {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.karta-rub {
+    background-image: url('podklady/rub.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.karta-lic {
+    background-size: cover;
+    background-position: center;
+    transform: rotateY(180deg);
+}
+
+.karta:active .karta-vnitrek {
+    transform: scale(0.95);
+}
+
+/* POMOCNÁ TŘÍDA PRO SKRÝVÁNÍ ELEMENTŮ */
+.skryte {
+    display: none !important;
+}
+
+/* --- VÝHERNÍ OKNO --- */
+#vyherni-okno {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.okno-obsah {
+    background: #ffffff;
+    padding: 40px 60px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.okno-obsah h2 {
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+    color: #28bebe;
+}
+
+.okno-obsah p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin: 0 0 30px 0;
+}
+
+#reset-tlacitko {
+    background-color: #28bebe;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(40, 190, 190, 0.3);
+}
+
+
+/* ==========================================================================
+   RESPONZIVNÍ ÚPRAVY PRO MOBILY A MALÉ DISPLEJE (Media Query)
+   ========================================================================== */
+@media (max-width: 900px) {
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 5px;
+    }
+
+    #uvodni-obrazovka {
+        padding: 20px;
+        width: 85%;
+        max-width: 400px;
+    }
+
+    .tlacitka-kontejner {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .btn-volba {
+        padding: 12px 20px;
+        font-size: 1rem;
+        width: 100%; /* Tlačítka pod sebou na mobilu */
+    }
+
+    #panel-skore {
+        gap: 10px;
+        margin-bottom: 15px;
+        flex-wrap: wrap; /* Skóre se přizpůsobí šířce */
+    }
+
+    .skore-box {
+        padding: 8px 15px;
+        min-width: 70px;
+        flex: 1;
+    }
+
+    .skore-body {
+        font-size: 1.4rem;
+    }
+
+    #herni-plocha {
+        gap: 8px;
+        /* Automatická mřížka pro mobil – naskládá maximum malých karet vedle sebe */
+        grid-template-columns: repeat(auto-fit, minmax(55px, 1fr)) !important;
+    }
+
+    .karta {
+        width: 100%;
+        max-width: 80px; /* Zmenšení karet na mobilu, aby se jich vešlo 6 vedle sebe */
+    }
+
+    .okno-obsah {
+        padding: 30px;
+        width: 85%;
+    }
+
+    .okno-obsah h2 {
+        font-size: 1.8rem;
+    }
+}
